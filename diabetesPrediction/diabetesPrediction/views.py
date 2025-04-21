@@ -6,8 +6,19 @@ from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score
 # Machine Learning imports
-from sklearn.preprocessing import StandardScaler  # Example scaler
-from sklearn.ensemble import RandomForestClassifier  # Example model
+from sklearn.preprocessing import StandardScaler 
+from sklearn.ensemble import RandomForestClassifier  
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import accuracy_score
+from sklearn.preprocessing import StandardScaler
+from sklearn.metrics import accuracy_score, f1_score, roc_auc_score, confusion_matrix, ConfusionMatrixDisplay, precision_score
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.neural_network import MLPClassifier
+
 
 # Other imports
 from typing import Tuple  # Optional, for type hints
@@ -57,8 +68,13 @@ X_scaled = scaler.fit_transform(X)
 # Splitting data
 X_train, X_test, Y_train, Y_test = train_test_split(X_scaled, Y, test_size=0.30, random_state=42)
 # Train the model
-model = LogisticRegression(max_iter=200)
+# model = LogisticRegression(max_iter=200)
+# model.fit(X_train, Y_train)
+
+
+model = MLPClassifier(hidden_layer_sizes=(100,), max_iter=1000, activation='relu', random_state=42)
 model.fit(X_train, Y_train)
+# mlp_pred = mlp.predict(X_test)
 
 def knowledge_base():
     return {
